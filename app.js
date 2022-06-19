@@ -9,7 +9,8 @@ const mongoose = require('mongoose')
 const ProductRoutes = require('./routes/ProductRoutes')
 app.use("/api/products", ProductRoutes)
 
-
+const BrandRoutes = require('./routes/BrandRoutes')
+app.use('/api/brands', BrandRoutes)
 
 const port = process.env.PORT || 3000
 

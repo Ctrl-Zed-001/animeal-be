@@ -14,7 +14,7 @@
 /dashboard/build
 
 # misc
-/dashboard.DS_Store
+/dashboard/.DS_Store
 /dashboard/.env.local
 /dashboard/.env.development.local
 /dashboard/.env.test.local

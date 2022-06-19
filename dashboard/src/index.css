@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bg-theme {
+    background-color: #2A3042;
+}
+
+.text-theme {
+    color: #2A3042;
+}
