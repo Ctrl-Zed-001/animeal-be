@@ -5,7 +5,9 @@
 /dashboard/node_modules
 
 /.pnp
+.env
 /dashboard/.pnp.js
+/dashboard/.env
 
 # testing
 /dashboard/coverage

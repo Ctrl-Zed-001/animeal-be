@@ -1,13 +1,17 @@
 const express = require('express')
 const router = express.Router()
-const brandModel = require('../model/BrandModel')
+const Brands = require('../model/BrandModel')
 
 router.get('/getall', (req, res) => {
-    console.log("get all brands")
+    Brands.find()
+        .then(result => {
+            res.send(result)
+        })
+        .catch(err => res.send(err))
 })
 
 router.post('/add', async (req, res) => {
-    let brand = new brandModel({
+    let brand = new Brands({
         name: 'whiskas'
     })
 

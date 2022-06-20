@@ -11,17 +11,19 @@ import Topbar from "./components/Topbar";
 
 function App() {
   return (
-    <div className="flex">
-      <Sidebar />
-      <div className="main-content flex-1 bg-gray-200">
-        <Topbar />
-        <BrowserRouter>
+    <BrowserRouter>
+      <div className="flex">
+        <Sidebar />
+        <div className="main-content flex-1 bg-gray-200">
+          <Topbar />
+
           <Routes>
             <Route path="/brands" element={<Brands />} />
           </Routes>
-        </BrowserRouter>
+
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 
