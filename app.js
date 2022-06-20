@@ -1,5 +1,8 @@
 const express = require('express')
 
+const dotenv = require('dotenv');
+dotenv.config();
+
 const app = express()
 const cors = require('cors')
 app.use(cors())
@@ -16,8 +19,7 @@ app.use('/api/brands', BrandRoutes)
 
 const port = process.env.PORT || 5000
 
-
-mongoose.connect("mongodb://localhost/animeal")
+mongoose.connect(process.env.MONGO_URI)
     .then(res => {
         console.log("connected sucessfully");
         app.listen(port, () => console.log(`server listening on port 5000`))
