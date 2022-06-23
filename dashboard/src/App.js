@@ -8,6 +8,8 @@ import './index.css'
 import Brands from './screens/Brands'
 import Sidebar from './components/Sidebar'
 import Topbar from "./components/Topbar";
+import AddBrand from "./screens/AddBrand";
+import Dashboard from "./screens/Dashboard";
 
 function App() {
   return (
@@ -18,7 +20,9 @@ function App() {
           <Topbar />
 
           <Routes>
-            <Route path="/brands" element={<Brands />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="brands" element={<Brands />} />
+            <Route path="brands/add" element={<AddBrand />} />
           </Routes>
 
         </div>

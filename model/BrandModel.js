@@ -7,7 +7,7 @@ const brandSchema = new mongoose.Schema({
     icon_mobile: String,
     banner_desktop: String,
     banner_mobile: String,
-    active: Boolean
+    isActive: Boolean
 }, {
     timestamps: true
 })
