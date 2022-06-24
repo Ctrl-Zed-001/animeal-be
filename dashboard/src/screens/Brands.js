@@ -4,19 +4,23 @@ import { FiTrash } from 'react-icons/fi'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { Pagination } from '@mui/material'
 
 
 const Brands = () => {
 
     const [brands, setBrands] = useState([])
+    const [totalCount, setTotalCount] = useState(0)
+    const [page, setPage] = useState(1)
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URI}/brands/getall`)
+        axios.get(`${process.env.REACT_APP_API_URI}/brands/getall?page=${page - 1}`)
             .then(res => {
-                setBrands(res.data)
+                setBrands(res.data.data)
+                setTotalCount(res.data.total)
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [page])
 
     return (
         <div className="container p-4">
@@ -69,6 +73,9 @@ const Brands = () => {
                     </tbody>
                 </table>
 
+                <div className="flex items-center justify-center mt-8">
+                    <Pagination count={totalCount} color="primary" onChange={(e, newPage) => setPage(newPage)} />
+                </div>
 
             </div>
         </div>

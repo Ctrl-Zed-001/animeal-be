@@ -18,12 +18,23 @@ const upload = multer({ storage: storage })
 
 const cpUpload = upload.fields([{ name: 'icon_desktop' }, { name: 'banner_desktop' }, { name: 'icon_mobile' }, { name: 'banner_mobile' }])
 
-router.get('/getall', (req, res) => {
-    Brands.find()
+router.get('/getall', async (req, res) => {
+    let page = req.query.page || 0
+    let dataPerPage = 10
+
+    let totalBrands = await Brands.count()
+    Brands
+        .find()
+        .skip(page * dataPerPage)
+        .limit(dataPerPage)
         .then(result => {
-            res.send(result)
+            res.status(200).json({
+                msg: "success",
+                data: result,
+                total: totalBrands
+            })
         })
-        .catch(err => res.send(err))
+        .catch(err => res.status(400).send(err))
 })
 
 router.post('/addnew', newBrandValidation, async (req, res) => {
