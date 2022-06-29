@@ -1,17 +1,19 @@
 import { BiSearchAlt, BiPlus } from 'react-icons/bi'
-import { MdEdit } from 'react-icons/md'
-import { FiTrash } from 'react-icons/fi'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Pagination } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import TableDetailRow from '../components/TableDetailRow'
 
 
-const Brands = () => {
+const DataTable = () => {
 
     const [brands, setBrands] = useState([])
     const [totalCount, setTotalCount] = useState(0)
     const [page, setPage] = useState(1)
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_API_URI}/brands/getall?page=${page - 1}`)
@@ -54,19 +56,7 @@ const Brands = () => {
                         {
                             brands?.map((brand, index) => {
                                 return (
-                                    <tr key={index} className='border-b'>
-                                        <td className='text-sm font-medium px-1 py-3'>{index + 1}</td>
-                                        <td className='text-sm font-medium px-1 py-3'>
-                                            <img src={brand.icon_desktop} className='rounded-full h-8 w-8' alt="" />
-                                        </td>
-                                        <td className='text-sm font-medium px-1 py-3'>{brand.name}</td>
-                                        <td className='text-sm font-medium px-1 py-3'>{brand.slug}</td>
-                                        <td className='text-sm font-medium px-1 py-3'>{brand.status}</td>
-                                        <td className='text-sm font-medium px-1 py-3 flex items-center'>
-                                            <MdEdit className='h-4 w-4 mr-2 text-gray-500 cursor-pointer' />
-                                            <FiTrash className='h-4 w-4 text-red-500 cursor-pointer' />
-                                        </td>
-                                    </tr>
+                                    <TableDetailRow ikey={index} index={index} brand={brand} />
                                 )
                             })
                         }
@@ -74,11 +64,11 @@ const Brands = () => {
                 </table>
 
                 <div className="flex items-center justify-center mt-8">
-                    <Pagination count={totalCount} color="primary" onChange={(e, newPage) => setPage(newPage)} />
+                    <Pagination count={Math.round(totalCount / 10) + 1} color="primary" onChange={(e, newPage) => setPage(newPage)} />
                 </div>
 
             </div>
         </div>
     )
 }
-export default Brands
+export default DataTable

@@ -5,11 +5,12 @@ import {
 } from "react-router-dom";
 import './index.css'
 
-import Brands from './screens/Brands'
 import Sidebar from './components/Sidebar'
 import Topbar from "./components/Topbar";
 import AddBrand from "./screens/AddBrand";
 import Dashboard from "./screens/Dashboard";
+import ViewBrand from "./screens/ViewBrand";
+import DataTable from "./screens/DataTable";
 
 function App() {
   return (
@@ -21,8 +22,10 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="brands" element={<Brands />} />
+            <Route path="brands" element={<DataTable />} />
             <Route path="brands/add" element={<AddBrand />} />
+            <Route path="/brands/view/:id" element={<ViewBrand />} />
+            <Route path="/brands/edit/:id" element={<AddBrand />} />
           </Routes>
 
         </div>

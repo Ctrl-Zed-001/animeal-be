@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import SingleImageUploadCard from '../components/SingleImageUploadCard'
 import slugCreator from '../helpers/CreateSlug'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AddBrand = () => {
 
@@ -12,18 +12,44 @@ const AddBrand = () => {
     const [desktopBanner, setDesktopBanner] = useState()
     const [mobileBanner, setMobileBanner] = useState()
 
+    const [pageHeading, setPageHeading] = useState("")
     const [loading, setLoading] = useState(false)
 
+    const [id, setId] = useState(null)
     const [name, setName] = useState('')
     const [slug, setSlug] = useState('')
     const [active, setActive] = useState(true)
 
     let navigate = useNavigate();
+    const params = useParams()
 
+
+    useEffect(() => {
+        if (params.id) {
+            setPageHeading(`Edit Brand : ${params.id}`)
+            axios.post(`${process.env.REACT_APP_API_URI}/brands/getone`, {
+                id: params.id
+            })
+                .then(res => {
+                    setId(res.data.data._id)
+                    setName(res.data.data.name)
+                    setSlug(res.data.data.slug)
+                    setActive(res.data.data.isActive)
+                    setDesktopIcon(res.data.data.icon_desktop)
+                    setDesktopBanner(res.data.data.banner_desktop)
+                    setMobileIcon(res.data.data.icon_mobile)
+                    setMobileBanner(res.data.data.banner_mobile)
+                })
+                .catch(err => console.log(err))
+        } else {
+            setPageHeading("Add new brand")
+        }
+    }, [])
 
     const addBrand = () => {
         setLoading(true)
-        axios.post(`${process.env.REACT_APP_API_URI}/brands/addnew`, {
+        axios.post(`${process.env.REACT_APP_API_URI}/brands/savebrand`, {
+            id: id,
             name: name,
             slug: slug,
             isActive: active
@@ -82,7 +108,7 @@ const AddBrand = () => {
 
     return (
         <div className="addbrand container p-4">
-            <h1 className="text-2xl font-semibold uppercase">Add New Brand</h1>
+            <h1 className="text-2xl font-semibold uppercase">{pageHeading}</h1>
 
             <div className="card bg-white rounded p-4 mt-6 shadow">
                 <h1 className="font-semibold mb-4">Basic Information</h1>
