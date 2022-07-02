@@ -2,7 +2,6 @@ import { BiSearchAlt, BiPlus } from 'react-icons/bi'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { Pagination } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import TableDetailRow from '../components/TableDetailRow'
 
@@ -64,7 +63,7 @@ const DataTable = () => {
                 </table>
 
                 <div className="flex items-center justify-center mt-8">
-                    <Pagination count={Math.round(totalCount / 10) + 1} color="primary" onChange={(e, newPage) => setPage(newPage)} />
+                    {/* <Pagination count={Math.round(totalCount / 10) + 1} color="primary" onChange={(e, newPage) => setPage(newPage)} /> */}
                 </div>
 
             </div>

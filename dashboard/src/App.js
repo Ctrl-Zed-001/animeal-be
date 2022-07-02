@@ -7,14 +7,17 @@ import './index.css'
 
 import Sidebar from './components/Sidebar'
 import Topbar from "./components/Topbar";
+
 import AddBrand from "./screens/AddBrand";
 import Dashboard from "./screens/Dashboard";
 import ViewBrand from "./screens/ViewBrand";
 import DataTable from "./screens/DataTable";
 
 function App() {
+
   return (
     <BrowserRouter>
+
       <div className="flex">
         <Sidebar />
         <div className="main-content flex-1 bg-gray-200">
