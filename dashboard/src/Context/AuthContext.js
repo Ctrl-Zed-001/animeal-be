@@ -15,6 +15,7 @@ const AuthContextProvider = (props) => {
     useEffect(() => {
         let token = localStorage.getItem("token")
         if (token) {
+            // TODO GET USER INFORMATION VIA API
             setIsAuthenticated(true)
             setIsLoading(false)
         } else {

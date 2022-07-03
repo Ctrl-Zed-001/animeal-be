@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 const Brands = require('../model/BrandModel')
 const { validationResult } = require('express-validator');
-const { newBrandValidation } = require('../validationSchema/Validation')
+const { newBrandValidation } = require('../middlewares/Validation')
+const jwtValidation = require('../middlewares/AuthValidation')
 
 const multer = require('multer')
 const storage = multer.diskStorage({
@@ -50,7 +51,7 @@ router.post('/getone', async (req, res, next) => {
 
 
 // ADD NEW BRAND OR EDIT EXISTING BRAND
-router.post('/savebrand', newBrandValidation, async (req, res) => {
+router.post('/savebrand', jwtValidation, newBrandValidation, async (req, res) => {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -111,7 +112,7 @@ router.post('/saveimages', cpUpload, async (req, res, next) => {
 })
 
 // CHANGE ACTIVE STATUS
-router.post("/changestatus", async (req, res) => {
+router.post("/changestatus", jwtValidation, async (req, res) => {
     let brand = await Brands.findByIdAndUpdate(req.body.id, {
         isActive: req.body.isActive
     })

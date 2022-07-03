@@ -31,7 +31,7 @@ router.post('/adminlogin', async (req, res, next) => {
             jwt.sign(
                 userData,
                 process.env.SECRET,
-                { expiresIn: "30d" },
+                { expiresIn: "1h" },
                 (err, token) => {
                     if (err) {
                         res.status(400).json({

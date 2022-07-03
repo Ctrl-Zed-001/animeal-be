@@ -15,7 +15,14 @@ const DataTable = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URI}/brands/getall?page=${page - 1}`)
+        axios.get(
+            `${process.env.REACT_APP_API_URI}/brands/getall?page=${page - 1}`,
+            {
+                headers: {
+                    token: localStorage.getItem('token')
+                }
+            }
+        )
             .then(res => {
                 setBrands(res.data.data)
                 setTotalCount(res.data.total)
