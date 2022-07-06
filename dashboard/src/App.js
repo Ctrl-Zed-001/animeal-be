@@ -12,8 +12,11 @@ import AddBrand from "./screens/AddBrand";
 import Dashboard from "./screens/Dashboard";
 import ViewBrand from "./screens/ViewBrand";
 import DataTable from "./screens/DataTable";
+import axios from "axios";
 
 function App() {
+
+  axios.defaults.headers.common['authorization'] = localStorage.getItem('token');
 
   return (
     <BrowserRouter>

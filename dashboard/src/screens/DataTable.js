@@ -10,8 +10,8 @@ const DataTable = () => {
 
     const [page, setPage] = useState(1)
 
-    const fetchData = async () => {
-        let res = await fetch(`${process.env.REACT_APP_API_URI}/brands/getall?page=${page - 1}`)
+    const fetchData = async (newPage) => {
+        let res = await fetch(`${process.env.REACT_APP_API_URI}/brands/getall?page=${newPage - 1}`)
         return res.json()
     }
 
@@ -60,7 +60,7 @@ const DataTable = () => {
                             {
                                 data.data.map((rowData, index) => {
                                     return (
-                                        <TableDetailRow key={index} index={index} rowData={rowData} />
+                                        <TableDetailRow key={index} index={index} rowData={rowData} page={page} />
                                     )
                                 })
                             }

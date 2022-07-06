@@ -54,10 +54,6 @@ const AddBrand = () => {
             name: name,
             slug: slug,
             isActive: active
-        }, {
-            headers: {
-                token: localStorage.getItem('token')
-            }
         })
 
             .then(res => {
@@ -98,12 +94,7 @@ const AddBrand = () => {
         );
         axios.post(
             `${process.env.REACT_APP_API_URI}/brands/saveimages`,
-            formData,
-            {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                }
-            }
+            formData
         )
             .then(res => {
                 setLoading(false)

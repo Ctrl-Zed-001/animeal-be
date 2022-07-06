@@ -1,5 +1,5 @@
 const Pagination = (props) => {
-    let totalPages = Math.ceil(props.total / 1)
+    let totalPages = Math.ceil(props.total / 10)
 
     return (
         <div className="pagination flex justify-between items-center gap-2">

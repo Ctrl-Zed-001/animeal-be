@@ -3,22 +3,37 @@ import { MdEdit } from 'react-icons/md'
 import { FiTrash } from 'react-icons/fi'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useQueryClient, useMutation } from 'react-query'
 
 const TableDetailRow = (props) => {
 
-    const [isActive, setIsActive] = useState(props.rowData.isActive)
     const navigate = useNavigate()
+    let queryClient = useQueryClient()
 
     const changeStatus = (status) => {
-        axios.post(`${process.env.REACT_APP_API_URI}/brands/changestatus`, {
+        return axios.post(`${process.env.REACT_APP_API_URI}/brands/changestatus`, {
             id: props.rowData._id,
             isActive: status
         })
-            .then(res => {
-                setIsActive(status)
-            })
-            .catch(err => console.log(err))
     }
+
+    const { mutate } = useMutation(changeStatus, {
+        onSuccess: (data, variables, context) => {
+            queryClient.setQueryData(['pageData', props.page], (oldQuery) => {
+                let oldData = oldQuery.data.filter(item => item._id === data.data.data._id)
+
+                let updateIndex = oldQuery.data.indexOf(oldData[0])
+
+                let newData = [...oldQuery.data]
+                newData[updateIndex] = data.data.data
+
+                return {
+                    ...oldQuery,
+                    data: [...newData]
+                }
+            })
+        }
+    })
 
 
     return (
@@ -31,9 +46,9 @@ const TableDetailRow = (props) => {
             <td className='text-sm font-medium px-1 py-3'>{props.rowData.slug}</td>
             <td className='text-sm font-medium px-1 py-3'>
                 {
-                    isActive ?
-                        <span onClick={() => changeStatus(false)} className='text-green-600 text-sm bg-green-200 p-1 rounded cursor-pointer'>active</span> :
-                        <span onClick={() => changeStatus(true)} className='text-red-600 text-sm bg-red-200 p-1 rounded cursor-pointer'>inactive</span>
+                    props.rowData.isActive ?
+                        <span onClick={() => mutate(false)} className='text-green-600 text-sm bg-green-200 p-1 rounded cursor-pointer'>active</span> :
+                        <span onClick={() => mutate(true)} className='text-red-600 text-sm bg-red-200 p-1 rounded cursor-pointer'>inactive</span>
                 }
             </td>
             <td className='text-sm font-medium px-1 py-3 flex items-center'>
