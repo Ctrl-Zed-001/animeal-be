@@ -4,6 +4,7 @@ import SingleImageUploadCard from '../components/SingleImageUploadCard'
 import slugCreator from '../helpers/CreateSlug'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 import { useNavigate, useParams } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 
 const AddBrand = () => {
 
@@ -53,15 +54,23 @@ const AddBrand = () => {
             name: name,
             slug: slug,
             isActive: active
+        }, {
+            headers: {
+                token: localStorage.getItem('token')
+            }
         })
 
             .then(res => {
                 if (desktopIcon || mobileIcon || desktopBanner || mobileBanner) {
                     uploadImages(res.data.data)
+                } else {
+                    setLoading(false)
+                    navigate("/brands")
                 }
             })
             .catch(err => {
-                console.log(err)
+                setLoading(false)
+                toast.error("Error writing data");
             })
     }
 
@@ -108,6 +117,7 @@ const AddBrand = () => {
 
     return (
         <div className="addbrand container p-4">
+            <Toaster />
             <h1 className="text-2xl font-semibold uppercase">{pageHeading}</h1>
 
             <div className="card bg-white rounded p-4 mt-6 shadow">

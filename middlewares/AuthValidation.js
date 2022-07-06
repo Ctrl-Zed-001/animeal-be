@@ -2,8 +2,10 @@ const jwt = require('jsonwebtoken')
 
 const authVerify = (req, res, next) => {
     try {
-        var decoded = jwt.verify(req.headers.token, process.env.SECRET);
-        next(decoded)
+        let token = req.headers.token.split(" ")[1]
+        var decoded = jwt.verify(token, process.env.SECRET);
+        res.authUser = decoded
+        next()
     } catch (err) {
         res.status(400).json({
             msg: "error",

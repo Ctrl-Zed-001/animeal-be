@@ -23,7 +23,7 @@ const cpUpload = upload.fields([{ name: 'icon_desktop' }, { name: 'banner_deskto
 // GET ALL BRANDS
 router.get('/getall', async (req, res) => {
     let page = req.query.page || 0
-    let dataPerPage = 10
+    let dataPerPage = 1
 
     let totalBrands = await Brands.count()
     Brands
@@ -68,7 +68,7 @@ router.post('/savebrand', jwtValidation, newBrandValidation, async (req, res) =>
             isActive: req.body.isActive
         })
             .then(data => res.status(200).json({ msg: "success", data: data }))
-            .catch(err => res.status(500).json({ msg: "something wrong with the server" }))
+            .catch(err => res.status(400).json({ msg: "something wrong with the server" }))
     } else {
         brand = new Brands({
             name: req.body.name,
@@ -81,7 +81,7 @@ router.post('/savebrand', jwtValidation, newBrandValidation, async (req, res) =>
         })
         brand.save()
             .then(data => res.status(200).json({ msg: "success", data: data }))
-            .catch(err => res.status(500).json({ msg: "something wrong with the server" }))
+            .catch(err => res.status(400).json({ msg: "something wrong with the server" }))
     }
 
 
