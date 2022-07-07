@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import SingleImageUploadCard from '../components/SingleImageUploadCard'
-import slugCreator from '../helpers/CreateSlug'
+import SingleImageUploadCard from '../../components/SingleImageUploadCard'
+import slugCreator from '../../helpers/CreateSlug'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 import { useNavigate, useParams } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
