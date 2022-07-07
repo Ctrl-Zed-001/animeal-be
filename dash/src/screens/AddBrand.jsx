@@ -28,7 +28,7 @@ const AddBrand = () => {
     useEffect(() => {
         if (params.id) {
             setPageHeading(`Edit Brand : ${params.id}`)
-            axios.post(`${process.env.REACT_APP_API_URI}/brands/getone`, {
+            axios.post(`${import.meta.env.VITE_API_URI}/brands/getone`, {
                 id: params.id
             })
                 .then(res => {
@@ -49,7 +49,7 @@ const AddBrand = () => {
 
     const addBrand = () => {
         setLoading(true)
-        axios.post(`${process.env.REACT_APP_API_URI}/brands/savebrand`, {
+        axios.post(`${import.meta.env.VITE_API_URI}/brands/savebrand`, {
             id: id,
             name: name,
             slug: slug,
@@ -93,7 +93,7 @@ const AddBrand = () => {
             mobileBanner
         );
         axios.post(
-            `${process.env.REACT_APP_API_URI}/brands/saveimages`,
+            `${import.meta.env.VITE_API_URI}/brands/saveimages`,
             formData
         )
             .then(res => {

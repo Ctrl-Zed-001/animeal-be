@@ -11,7 +11,7 @@ const TableDetailRow = (props) => {
     let queryClient = useQueryClient()
 
     const changeStatus = (status) => {
-        return axios.post(`${process.env.REACT_APP_API_URI}/brands/changestatus`, {
+        return axios.post(`${import.meta.env.VITE_API_URI}/brands/changestatus`, {
             id: props.rowData._id,
             isActive: status
         })

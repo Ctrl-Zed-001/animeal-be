@@ -11,7 +11,7 @@ const ViewBrand = () => {
 
     useEffect(() => {
         if (params.id) {
-            axios.post(`${process.env.REACT_APP_API_URI}/brands/getone`, {
+            axios.post(`${import.meta.env.VITE_API_URI}/brands/getone`, {
                 id: params.id
             })
                 .then(res => {

@@ -25,7 +25,7 @@ const AuthContextProvider = (props) => {
     }, [])
 
     const login = (username, password) => {
-        axios.post(`${process.env.REACT_APP_API_URI}/auth/adminlogin`, {
+        axios.post(`${import.meta.env.VITE_API_URI}/auth/adminlogin`, {
             username: username,
             password: password
         })

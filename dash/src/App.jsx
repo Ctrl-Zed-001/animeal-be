@@ -32,6 +32,7 @@ function App() {
             <Route path="brands/add" element={<AddBrand />} />
             <Route path="/brands/view/:id" element={<ViewBrand />} />
             <Route path="/brands/edit/:id" element={<AddBrand />} />
+            <Route path="products" element={<DataTable />} />
           </Routes>
 
         </div>

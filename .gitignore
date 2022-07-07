@@ -2,27 +2,31 @@
 
 # dependencies
 /node_modules
+/dash/node_modules
 /dashboard/node_modules
-
 /.pnp
 .env
-/dashboard/.pnp.js
-/dashboard/.env
 
-# testing
-/dashboard/coverage
+# Logs
+/dash/logs
+/dash/*.log
+/dash/npm-debug.log*
+/dash/yarn-debug.log*
+/dash/yarn-error.log*
+/dash/pnpm-debug.log*
+/dash/lerna-debug.log*
 
-# production
-/dashboard/build
+/dash/dist
+/dash/dist-ssr
+/dash/*.local
 
-# misc
-/dashboard/.DS_Store
-/dashboard/.env.local
-/dashboard/.env.development.local
-/dashboard/.env.test.local
-/dashboard/.env.production.local
-
-/dashboard/npm-debug.log*
-/dashboard/yarn-debug.log*
-/dashboard/yarn-error.log*
-/dashboard/.gitignore
+# Editor directories and files
+/dash/.vscode/*
+/dash/!.vscode/extensions.json
+/dash/.idea
+/dash/.DS_Store
+/dash/*.suo
+/dash/*.ntvs*
+/dash/*.njsproj
+/dash/*.sln
+/dash/*.sw?

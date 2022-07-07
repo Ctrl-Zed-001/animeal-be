@@ -5,4 +5,4 @@ const slugCreator = (text) => {
     return slug
 }
 
-module.exports = slugCreator
+export default slugCreator

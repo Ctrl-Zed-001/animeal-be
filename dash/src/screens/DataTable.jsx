@@ -1,17 +1,19 @@
 import { BiSearchAlt, BiPlus, BiLoader } from 'react-icons/bi'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import TableDetailRow from '../components/TableDetailRow'
 import { useQuery } from 'react-query'
 import Pagination from '../components/Pagination'
+import { useLocation } from 'react-router-dom'
 
 
 const DataTable = () => {
 
     const [page, setPage] = useState(1)
+    const route = useLocation()
 
     const fetchData = async (newPage) => {
-        let res = await fetch(`${process.env.REACT_APP_API_URI}/brands/getall?page=${newPage - 1}`)
+        let res = await fetch(`${import.meta.env.VITE_API_URI}${route.pathname}/getall?page=${newPage - 1}`)
         return res.json()
     }
 

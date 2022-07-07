@@ -1,10 +1,16 @@
 const express = require('express')
 const router = express.Router()
+const Product = require('../model/ProductModel')
 
 router.get('/getall', (req, res) => {
-    axios.get('https://62a5d6dcb9b74f766a402398.mockapi.io/api/products')
-        .then(response => res.send(response.data))
-        .catch(err => console.log(err))
+    Product.find()
+        .then(data => res.status(200).json({
+            msg: "success",
+            data: data
+        }))
+        .catch(err => res.status(400).json({
+            msg: "error"
+        }))
 })
 
 router.get('/addnew', (req, res) => {
