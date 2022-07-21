@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import TableDetailRow from './TableDetailRow'
 import Pagination from './Pagination'
 
-const DataTable = ({ data, page }) => {
+const DataTable = ({ data, page, buttonText, link }) => {
     return (
         <div className="text-theme card bg-white p-4 rounded mt-8">
             <div className="flex justify-between items-center">
@@ -11,9 +11,9 @@ const DataTable = ({ data, page }) => {
                     <BiSearchAlt className='h-5 w-5 absolute top-3 left-2' />
                     <input type="text" className="rounded border border-black p-2 pl-8" />
                 </div>
-                <Link to="/brands/add" className=' flex items-center rounded bg-theme p-2'>
+                <Link to={link} className='text-sm flex items-center rounded bg-theme p-2'>
                     <BiPlus className='h-5 w-5 mr-1' />
-                    add new brand
+                    {buttonText}
                 </Link>
             </div>
             <table className='w-full mt-8 rounded text-left'>
@@ -40,7 +40,11 @@ const DataTable = ({ data, page }) => {
                 </tbody>
             </table>
             <div className="flex items-center justify-center mt-8">
-                <Pagination total={data.total} paginate={(pageNumber) => setPage(pageNumber)} />
+                {
+                    data.data.length > 0 ?
+                        <Pagination total={data.total} paginate={(pageNumber) => setPage(pageNumber)} /> :
+                        <></>
+                }
             </div>
         </div>
     )

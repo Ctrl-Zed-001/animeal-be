@@ -1,8 +1,9 @@
 import { useRef, useState, useEffect } from "react"
-import { BsImage } from 'react-icons/bs'
+import { BsImages } from 'react-icons/bs'
 import { RiCloseFill } from 'react-icons/ri'
 
-const ImageUploadCard = (props) => {
+
+const MultipleImageUpload = (props) => {
     const fileInput = useRef(null)
     const [preview, setPreview] = useState()
 
@@ -33,11 +34,11 @@ const ImageUploadCard = (props) => {
                                 setPreview(objectUrl)
                             }}
                             ref={fileInput} type="file" className="hidden" />
-                        <BsImage className='h-16 w-16 mx-auto mb-2' />
+                        <BsImages className='h-16 w-16 mx-auto mb-2' />
                         <p className="text-sm">{props.title}</p>
                     </div>
             }
         </div>
     )
 }
-export default ImageUploadCard
+export default MultipleImageUpload

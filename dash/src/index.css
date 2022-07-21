@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
 .bg-theme {
     background-color: #2A3042;
     color: white;
@@ -9,4 +13,15 @@
 
 .text-theme {
     color: #2A3042;
+}
+
+.sidebar ul li {
+    color: #79829c;
+    transition: 0.5s;
+}
+
+.sidebar ul .active li,
+.sidebar ul li:hover {
+    color: white;
+    transition: 0.5s;
 }

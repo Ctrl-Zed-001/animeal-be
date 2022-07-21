@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import SingleImageUploadCard from '../../components/SingleImageUploadCard'
-import slugCreator from '../../helpers/CreateSlug'
+import slugCreator from '../../utils/CreateSlug'
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
 import { useNavigate, useParams } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
@@ -19,7 +19,6 @@ const AddBrand = () => {
     const [id, setId] = useState(null)
     const [name, setName] = useState('')
     const [slug, setSlug] = useState('')
-    const [active, setActive] = useState(true)
 
     let navigate = useNavigate();
     const params = useParams()
@@ -35,7 +34,6 @@ const AddBrand = () => {
                     setId(res.data.data._id)
                     setName(res.data.data.name)
                     setSlug(res.data.data.slug)
-                    setActive(res.data.data.isActive)
                     setDesktopIcon(res.data.data.icon_desktop)
                     setDesktopBanner(res.data.data.banner_desktop)
                     setMobileIcon(res.data.data.icon_mobile)
@@ -53,7 +51,7 @@ const AddBrand = () => {
             id: id,
             name: name,
             slug: slug,
-            isActive: active
+            isActive: true
         })
 
             .then(res => {
@@ -109,13 +107,28 @@ const AddBrand = () => {
     return (
         <div className="addbrand container p-4">
             <Toaster />
-            <h1 className="text-2xl font-semibold uppercase">{pageHeading}</h1>
+            <div className="flex justify-between gap-4 mt-6">
+                <h1 className="text-lg font-semibold uppercase">{pageHeading}</h1>
+                <div>
+                    <button className='bg-theme text-white rounded py-1 px-3 mr-4' onClick={() => navigate("/brands")}>Publish</button>
+                    {
+                        loading ?
+                            <button onClick={addBrand} className='bg-gray-100 text-theme rounded py-1 px-3 flex gap-2 items-center' disabled>
+                                <AiOutlineLoading3Quarters className='animate-spin' />
+                                saving...
+                            </button> :
+                            <button onClick={addBrand} className='bg-gray-300 text-gray-800 rounded py-1 px-3'>Save</button>
+                    }
+                </div>
+
+            </div>
+
 
             <div className="card bg-white rounded p-4 mt-6 shadow">
-                <h1 className="font-semibold mb-4">Basic Information</h1>
-                <div className='flex items-center justify-between gap-20 text-sm'>
+                <h1 className="font-semibold mb-4 text-gray-600">Basic Information</h1>
+                <div className='flex items-center justify-between gap-10 text-sm'>
                     <div className="formbox flex-1">
-                        <label htmlFor="name">Name</label>
+                        <label className="text-sm" htmlFor="name">Name</label>
                         <br />
                         <input
                             value={name}
@@ -125,17 +138,9 @@ const AddBrand = () => {
                             }} type="text" className="border-2 border-gray-200 mt-2 rounded p-1 w-full" />
                     </div>
                     <div className="formbox flex-1">
-                        <label htmlFor="name">Slug</label>
+                        <label className="text-sm" htmlFor="name">Slug</label>
                         <br />
                         <input value={slug} disabled type="text" className="border-2 border-gray-200 mt-2 rounded p-1 w-full" />
-                    </div>
-                    <div className="formbox flex-1">
-                        <label htmlFor="name">Is Active</label>
-                        <br />
-                        <select value={active} onChange={(e) => setActive(e.target.value)} type="text" className="border-2 border-gray-200 mt-2 rounded p-1 w-full">
-                            <option value={true}>True</option>
-                            <option value={false} >False</option>
-                        </select>
                     </div>
                 </div>
 
@@ -153,18 +158,7 @@ const AddBrand = () => {
 
             </div>
 
-            <div className="flex justify-end gap-4 mt-6">
-                <button className='bg-red-500 text-white rounded py-1 px-3' onClick={() => navigate("/brands")}>Cancel</button>
-                {
-                    loading ?
-                        <button onClick={addBrand} className='bg-gray-100 text-theme rounded py-1 px-3 flex gap-2 items-center' disabled>
-                            <AiOutlineLoading3Quarters className='animate-spin' />
-                            saving...
-                        </button> :
-                        <button onClick={addBrand} className='bg-theme text-white rounded py-1 px-3'>Save</button>
-                }
 
-            </div>
         </div>
     )
 }

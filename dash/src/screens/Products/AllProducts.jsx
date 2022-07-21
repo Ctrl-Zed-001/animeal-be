@@ -18,7 +18,7 @@ const AllProducts = () => {
 
     return (
         <div className="container p-4">
-            <h1 className="text-2xl font-semibold uppercase">Products</h1>
+            <h1 className="text-lg font-semibold uppercase">Products</h1>
 
             {isLoading && <BiLoader className="mx-auto animate-spin mt-10 text-xl" />}
 
@@ -26,7 +26,7 @@ const AllProducts = () => {
 
             {
                 data &&
-                <DataTable data={data} page={page} />
+                <DataTable data={data} page={page} buttonText="add new product" link="/products/add" />
             }
 
 
